@@ -1,0 +1,32 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Django - Portfolio</h1>
+            <p class="lead text-muted">
+                Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.
+            </p>
+            <a href="https://www.linkedin.com/in/souleymane-diallo-developpeur-web/" target="_blank" class="btn btn-primary my-2">Linkedin</a>
+            <a href="https://github.com/souleymanediallo" target="_blank" class="btn btn-secondary my-2">Github</a>
+        </div>
+    </section>
+    <section class="my-5">
+        <div class="container">
+            <div class="row">
+                {% for folio in folios %}
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <a href="{% url 'folio-detail' folio.id %}"><img src="{{ folio.image.url }}" alt="{{ folio.title }}" class="card-img-top"></a>
+                        <div class="card-body text-center">
+                            <h2 class="title-heading">{{ folio.title }}</h2>
+                            <p class="text-muted">{{ folio.description|truncatechars:200 }}</p>
+                            <a href="{% url 'folio-detail' folio.id %}" class="btn btn-sm btn-primary btn-block">View Detail</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
